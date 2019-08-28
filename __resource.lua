@@ -10,4 +10,4 @@ files {
 
 ui_page "html/radar.html"
 
-client_script 'speedcamera.lua'
+client_script 'client.lua'
