@@ -141,7 +141,7 @@ Citizen.CreateThread(function()
 end)
 
 RegisterNUICallback("yourpradar-callback",function(data)
-	TriggerServerEvent('radartablet:radarget',data)	
+	TriggerEvent('radartablet:radarget',data)	
 end)
 
 
