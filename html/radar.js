@@ -39,7 +39,7 @@ $(document).ready(function () {
                     
                     if( speed > speedlimit ){
 
-                        difference = (parseInt(item.speedkm)-parseInt(item.limit))
+                        difference = (parseInt(item.speedkm)-parseInt(speedlimit))
                         if( difference < 10){
                             $class = "success"
                         }else if(difference < 20){
