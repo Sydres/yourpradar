@@ -15,7 +15,8 @@ local info = 'nope'
 local blip = nil
 local shown = false
 local power = false
-local radartablet = true
+local radartablet = false
+local blipcreat = false
 
 Citizen.CreateThread(function()
 
@@ -102,19 +103,20 @@ Citizen.CreateThread(function()
 
 						local carM = GetClosestVehicle(pos['x'], pos['y'], pos['z'], 15.0,0,70)
 						
-						
-						if patrolSpeed == '000' then
-							RemoveBlip(blip)
-							blip = AddBlipForEntity(ped)
+						if blipcreat == true then
+							if patrolSpeed == '000' then
+								RemoveBlip(blip)
+								blip = AddBlipForEntity(ped)
 
-							SetBlipColour(blip, 30)
-							SetBlipSprite(blip, 56)
-							SetBlipScale(blip, 0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString('Polis Radarı')
-							EndTextCommandSetBlipName(blip)
-						else
-							RemoveBlip(blip)
+								SetBlipColour(blip, 30)
+								SetBlipSprite(blip, 56)
+								SetBlipScale(blip, 0.5)
+								BeginTextCommandSetBlipName("STRING")
+								AddTextComponentString('Polis Radarı')
+								EndTextCommandSetBlipName(blip)
+							else
+								RemoveBlip(blip)
+							end
 						end
 
 						if carM ~=nil then
