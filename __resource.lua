@@ -10,4 +10,9 @@ files {
 
 ui_page "html/radar.html"
 
-client_script 'client.lua'
+server_scripts {    
+}
+
+client_script{
+    "client.lua"
+}

@@ -34,12 +34,27 @@ $(document).ready(function () {
                 $('#Radar #speed span').html(parseInt(item.speedkm));
 
                 if($('#Radar #Power').attr("data-val") == "on"){
-                    speedlimit  = parseInt($('#Radar #SpeedLimit span').html())
+                    var speedlimit  = parseInt($('#Radar #SpeedLimit span').html())
                     speed       = $('#Radar #speed span').html()
                     
                     if( speed > speedlimit ){
 
-                        html    = '<div id="' + item.plate + '" class="item">' + item.plate + ' - ' + item.model + ' - ' + parseInt(item.speedkm) + ' -' + speedlimit + '</div>';
+                        difference = (parseInt(item.speedkm)-parseInt(item.limit))
+                        if( difference < 10){
+                            $class = "success"
+                        }else if(difference < 20){
+                            $class = "warning"
+                        }else{
+                            $class = "danger"
+                        }
+
+                        html =        '<div id="' + item.plate + '" class="item">';
+                        html = html + '<div class="plate">'  + item.plate + '</div>';
+                        html = html + '<div class="model">'  + item.model + '</div>';
+                        html = html + '<div class="speed ' + $class + '">'  + parseInt(item.speedkm) + ' KM</div>';
+                        html = html + '<div class="speedlimit">'  + parseInt(speedlimit) + ' KM</div>';
+                        html = html + '<div style="clear:bold"></div>';
+                        html = html + '</div>';
 
                         if($('#Radar #List .list .item').length == 0){
                             $('#Radar #List .list').append(html);
@@ -49,11 +64,22 @@ $(document).ready(function () {
                             }
                         }
 
-                        if($('#Radar #List .list .item').length > 12){
-                            for (var i = 12; i < 20; i++) {
+                        if($('#Radar #List .list .item').length > 8){
+                            for (var i = 8; i < 18; i++) {
                                 $('#Radar #List .list .item').eq(i).remove();
                             }
                         }
+                        
+                        if(item.radartablet == true){
+                            $.post("http://yourpradar/yourpradar-callback", JSON.stringify({
+                                radar   : item.radar,
+                                plate   : item.plate,
+                                model   : item.model,
+                                Km      : parseInt(item.speedkm),
+                                limit   : parseInt($('#Radar #SpeedLimit span').html())
+                            }))
+                        }
+                        
 
                     }
                 }
@@ -70,7 +96,7 @@ $(document).ready(function () {
 
     document.addEventListener('keyup', function (data) {
         if (data.which == 27) {
-            $.post("http://speedcamera/radar-callback", JSON.stringify({
+            $.post("http://yourpradar/radar-callback", JSON.stringify({
                 hide: true
             }))
         }

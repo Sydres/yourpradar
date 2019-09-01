@@ -134,3 +134,40 @@
     font-family: 'Dosis', sans-serif;
     color:#ffffff;
 }
+
+#Radar #List .item{
+    clear: both;
+    height: 30px;
+}
+#Radar #List .plate{
+    float:left; 
+    width: 85px;
+}
+#Radar #List .model{
+    float:left; 
+    width: 100px;
+}
+#Radar #List .speed{
+    float:left; 
+    text-align: right;
+    width: 50px;
+}
+#Radar #List .speedlimit{
+    float:left; 
+    text-align: right;
+    width: 100px;
+}
+
+
+#Radar #List .success{
+    color:yellowgreen;
+    font-weight: bold;
+}
+#Radar #List .warning{
+    color:yellow;
+    font-weight: bold;
+}
+#Radar #List .danger{
+    color:tomato;
+    font-weight: bold;
+}

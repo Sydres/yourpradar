@@ -15,6 +15,7 @@ local info = 'nope'
 local blip = nil
 local shown = false
 local power = false
+local radartablet = true
 
 Citizen.CreateThread(function()
 
@@ -32,7 +33,8 @@ Citizen.CreateThread(function()
 					plate 		= '', 
 					patrolSpeed	= 0,
 					speedkm 	= 0, 
-					speedmph 	= 0
+					speedmph 	= 0,
+					radartablet = radartablet
 				})
 			else 
 				shown = true 	
@@ -128,6 +130,7 @@ Citizen.CreateThread(function()
 								plate 		= plate, 
 								speedkm 	= herSpeedKm, 
 								speedmph 	= herSpeedMph,
+								radartablet = radartablet
 							})	
 						end
 					end
@@ -136,6 +139,11 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+RegisterNUICallback("yourpradar-callback",function(data)
+	TriggerServerEvent('radartablet:radarget',data)	
+end)
+
 
 function REQUEST_NUI_FOCUS(bool)
 	SetNuiFocus(bool, bool) -- focus, cursor
